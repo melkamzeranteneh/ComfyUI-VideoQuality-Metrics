@@ -33,6 +33,14 @@ pip install -r ComfyUI-VideoQuality-Metrics/requirements.txt
 
 Restart ComfyUI. Nodes appear under `VideoQuality/` category.
 
+## Video & Batch Handling
+
+All nodes accept **Video Tensors** `[T, H, W, 3]` and **Image Batches** `[N, H, W, 3]`.
+
+- **Fidelity Metrics** (PSNR, SSIM, ΔE2000): Return the **average** quality across all frames in the batch.
+- **Temporal Metrics**: Require at least 2 frames (T ≥ 2) to compute motion consistency.
+- **Distributional Metrics**: Compare the entire distribution of the generated batch against the reference batch.
+
 ## Node Reference
 
 | Node | Inputs | Outputs |

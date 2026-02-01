@@ -1,5 +1,5 @@
-from .core.fidelity import calculate_psnr, calculate_ssim
-from .core.color import calculate_ciede2000
+from ..core.fidelity import calculate_psnr, calculate_ssim
+from ..core.color import calculate_ciede2000
 
 class VQ_FullReferenceMetrics:
     @classmethod

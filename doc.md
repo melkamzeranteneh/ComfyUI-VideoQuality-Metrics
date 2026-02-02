@@ -4,6 +4,27 @@ This document provides an exhaustive breakdown of every metric implemented in th
 
 ---
 
+## 📂 Evaluation Strategies: With vs. Without Reference
+
+A common challenge in Generative AI (Diffusion models) is the lack of a "ground truth" reference video. This library supports three distinct evaluation modes:
+
+### Scenario A: Video-to-Video / Upscaling (Full-Reference)
+*   **Workflow**: You have an input video and an AI-processed output.
+*   **Metrics**: Use **all metrics** (PSNR, SSIM, ΔE00, Warping Error, FVD).
+*   **Goal**: Ensure the AI preserved the structure and color of the source while adding detail.
+
+### Scenario B: Text-to-Video (No-Reference / Internal)
+*   **Workflow**: You have a single generated video from a text prompt.
+*   **Metrics**: Use **Temporal Consistency** metrics (`VQ_TemporalConsistency`, `VQ_MotionSmoothness`).
+*   **Goal**: These nodes analyze the video *internally*. They detect flickering, jitter, and unnatural motion without needing a reference.
+
+### Scenario C: Comparative Benchmarking (Workflow A vs. B)
+*   **Workflow**: You have two different models/prompts and want to know which is better.
+*   **Metrics**: Use **Distributional Metrics** (FVD, FID) and **Fidelity Metrics** (using one workflow as the "baseline").
+*   **Goal**: Use `VQ_MetricsComparison` to see which workflow is statistically more realistic or stable.
+
+---
+
 ## 🏗️ System Architecture
 The following diagram illustrates the metric extraction and evaluation pipeline implemented in this toolkit:
 
